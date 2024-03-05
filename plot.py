@@ -48,7 +48,7 @@ def plot_graphs(nodes, x_values, y_values, filename):
     plt.show()
 
 # Имя файла с данными
-filename = 'cheb1.txt'
+filename = 'eq1.txt'
 
 # Чтение данных из файла
 nodes, x_values, y_values = read_data_from_file(filename)

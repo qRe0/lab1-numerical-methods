@@ -76,7 +76,7 @@ func arrMax(arr []float64) float64 {
 
 func main() {
 	a, b := -5.0, 5.0
-	n := 10
+	n := 30
 
 	eqnodes := equdistant(a, b, n)
 	chebnodes := chebshev(a, b, n)
