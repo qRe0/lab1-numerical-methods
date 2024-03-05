@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"sort"
 )
 
 // Исходная функция f1(x)
@@ -65,9 +66,17 @@ func newtonInterp(x, y []float64, value float64) float64 {
 	return result
 }
 
+func arrMax(arr []float64) float64 {
+	sort.Slice(arr, func(i, j int) bool {
+		return arr[i] < arr[j]
+	})
+
+	return arr[len(arr)-1]
+}
+
 func main() {
 	a, b := -5.0, 5.0
-	n := 20
+	n := 10
 
 	eqnodes := equdistant(a, b, n)
 	chebnodes := chebshev(a, b, n)
@@ -95,11 +104,17 @@ func main() {
 		fmt.Printf("f1(%f) = %f, f2(%f) = %f\n", chebnodes[i], cheb1[i], chebnodes[i], cheb2[i])
 	}
 
-	fmt.Println("Newton interpolation:")
+	d := make([]float64, 101)
 	for i := 0; i <= 100; i++ {
 		x := a + float64(i)*(b-a)/100
-		fmt.Printf("f1(%f) = %f, f2(%f) = %f\n", x, newtonInterp(eqnodes, eq1, x), x, newtonInterp(eqnodes, eq2, x))
+		di := math.Abs(newtonInterp(eqnodes, eq1, x) - f1(x))
+		d[i] = di
 	}
+
+	fmt.Println("-------------------------------")
+
+	maxEl := arrMax(d)
+	fmt.Printf("|d| = %.8f\n", maxEl)
 
 	fmt.Println("-------------------------------")
 
