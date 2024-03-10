@@ -66,6 +66,7 @@ func newtonInterp(x, y []float64, value float64) float64 {
 	return result
 }
 
+// Поиск максимального элемента массива
 func arrMax(arr []float64) float64 {
 	sort.Slice(arr, func(i, j int) bool {
 		return arr[i] < arr[j]
@@ -107,14 +108,14 @@ func main() {
 	d := make([]float64, 101)
 	for i := 0; i <= 100; i++ {
 		x := a + float64(i)*(b-a)/100
-		di := math.Abs(newtonInterp(eqnodes, eq1, x) - f1(x))
+		di := math.Abs(newtonInterp(chebnodes, cheb2, x) - f2(x))
 		d[i] = di
 	}
 
 	fmt.Println("-------------------------------")
 
 	maxEl := arrMax(d)
-	fmt.Printf("|d| = %.8f\n", maxEl)
+	fmt.Printf("n = %d, |d| = %.8f\n", n, maxEl)
 
 	fmt.Println("-------------------------------")
 
